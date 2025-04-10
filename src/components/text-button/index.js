@@ -1,37 +1,25 @@
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { Animated } from 'react-native';
+import React, { PureComponent } from "react";
+import { Animated } from "react-native";
 
-import Button from '../button';
-import { styles } from './styles';
+import Button from "../button";
+import { styles } from "./styles";
 
 export default class TextButton extends PureComponent {
   static defaultProps = {
-    color: 'transparent',
-    disabledColor: 'transparent',
+    color: "transparent",
+    disabledColor: "transparent",
 
-    titleColor: 'rgb(0, 0, 0)',
-    disabledTitleColor: 'rgba(0, 0, 0, .26)',
+    titleColor: "rgb(0, 0, 0)",
+    disabledTitleColor: "rgba(0, 0, 0, .26)",
 
-    shadeOpacity: 0.20,
-  };
-
-  static propTypes = {
-    ...Button.propTypes,
-
-    title: PropTypes.string.isRequired,
-    titleColor: PropTypes.string,
-    titleStyle: Animated.Text.propTypes.style,
-    disabledTitleColor: PropTypes.string,
+    shadeOpacity: 0.2,
   };
 
   constructor(props) {
     super(props);
 
-    let {
-      disabled,
-      disableAnimation = new Animated.Value(disabled? 1 : 0),
-    } = this.props;
+    let { disabled, disableAnimation = new Animated.Value(disabled ? 1 : 0) } =
+      this.props;
 
     this.state = {
       disableAnimation,
@@ -40,14 +28,8 @@ export default class TextButton extends PureComponent {
 
   render() {
     let { disableAnimation } = this.state;
-    let {
-      title,
-      titleColor,
-      titleStyle,
-      disabledTitleColor,
-      style,
-      ...props
-    } = this.props;
+    let { title, titleColor, titleStyle, disabledTitleColor, style, ...props } =
+      this.props;
 
     let titleStyleOverrides = {
       color: disableAnimation.interpolate({

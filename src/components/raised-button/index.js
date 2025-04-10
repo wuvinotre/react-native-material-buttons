@@ -1,21 +1,17 @@
-import React, { PureComponent } from 'react';
-import { Animated, Platform } from 'react-native';
+import React, { PureComponent } from "react";
+import { Animated, Platform } from "react-native";
 
-import { styles } from './styles';
-import Button from '../button';
+import { styles } from "./styles";
+import Button from "../button";
 
 export default class RaisedButton extends PureComponent {
-  static propTypes = {
-    ...Button.propTypes,
-  };
-
   constructor(props) {
     super(props);
 
     let {
       disabled,
       focusAnimation = new Animated.Value(0),
-      disableAnimation = new Animated.Value(disabled? 1 : 0),
+      disableAnimation = new Animated.Value(disabled ? 1 : 0),
     } = this.props;
 
     this.state = {
@@ -28,14 +24,13 @@ export default class RaisedButton extends PureComponent {
     let { focusAnimation, disableAnimation } = this.state;
     let { style, children, ...props } = this.props;
 
-    let animation = Animated
-      .subtract(focusAnimation, disableAnimation);
+    let animation = Animated.subtract(focusAnimation, disableAnimation);
 
     let buttonStyle = Platform.select({
       ios: {
         shadowOpacity: disableAnimation.interpolate({
           inputRange: [0, 1],
-          outputRange: [0.30, 0],
+          outputRange: [0.3, 0],
         }),
 
         shadowRadius: animation.interpolate({
@@ -64,7 +59,7 @@ export default class RaisedButton extends PureComponent {
     return (
       <Button
         {...props}
-        style={[ styles.container, buttonStyle, style ]}
+        style={[styles.container, buttonStyle, style]}
         focusAnimation={focusAnimation}
         disableAnimation={disableAnimation}
       >
